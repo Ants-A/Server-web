@@ -1,24 +1,29 @@
 <?php
 
-$test = function() 
+class Box 
 {
-  var_dump('Shh');
-};
+  public $width;
+  public $height;
+  public $length;
+  public $isOpen = false;
+  public function open()
+  {
+    $this->isOpen = true;
+  }
+}
 
-var_dump($test);
+$box1 = new Box();
+$box1->width = 10;
+$box1->height = 10;
+$box1->length = 10;
+$box1->open();
 
-$test();
-call_user_func($test);
 
-$numbers = [1, 2, 3, 4, 5];
+$box2 = new Box();
+$box2->width = 20;
+$box2->height = 20;
+$box2->length = 20;
+$box2->open();
 
-/*
-$squares = array_map(function ($n)
-{
-  return $n * $n;
-}, $numbers);
- */
-
-$squares = array_map(fn ($n) => $n * $n, $numbers);
-
-var_dump($squares);
+var_dump($box1);
+var_dump($box2);
