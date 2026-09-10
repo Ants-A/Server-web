@@ -12,18 +12,21 @@ class Box
   }
 }
 
+$num1 = 1;
+$num2 = $num1;
+$num1 = 2;
+var_dump($num1, $num2);
+
 $box1 = new Box();
-$box1->width = 10;
-$box1->height = 10;
-$box1->length = 10;
-$box1->open();
+$box1->width = 1;
+$box2 = clone $box1;
+$box1->width = 2;
+var_dump($box1, $box2);
 
 
-$box2 = new Box();
-$box2->width = 20;
-$box2->height = 20;
-$box2->length = 20;
-$box2->open();
-
-var_dump($box1);
-var_dump($box2);
+$numbers = [1,2,3,4,5];
+foreach($numbers as &$n) 
+{
+  $n+=1;
+}
+var_dump($numbers);
