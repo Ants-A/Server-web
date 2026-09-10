@@ -1,31 +1,24 @@
 <?php
- 
-function helloName($name='Nameless', $age='unknown') 
+
+$test = function() 
 {
-  var_dump("Hello , $name! You are $age old!");
-}
+  var_dump('Shh');
+};
 
-helloName('Kaspar', 33);
-helloName('Mats', 69);
-helloName('Ants', 18);
+var_dump($test);
 
-function square($a) 
+$test();
+call_user_func($test);
+
+$numbers = [1, 2, 3, 4, 5];
+
+/*
+$squares = array_map(function ($n)
 {
-  if ($a<0)
-  {
-    return 0;
-  }
-  return $a * $a;
-}
+  return $n * $n;
+}, $numbers);
+ */
 
-$answer = square(2);
+$squares = array_map(fn ($n) => $n * $n, $numbers);
 
-function recursion($i) {
-  if ($i < 10)
-  {
-    var_dump($i);
-    recursion($i+1);
-  }
-}
-
-recursion(0);
+var_dump($squares);
