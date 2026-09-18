@@ -1,38 +1,17 @@
-<?php
+<?php include __DIR__ . '/partials/header.php'; ?>
+<?php include __DIR__ . '/partials/icons.php'; ?>
+<?php include __DIR__ . '/partials/theme-select.php'; ?>
+<?php include __DIR__ . '/partials/nav.php'; ?>
+    <main class="container">
+      <?php include __DIR__ . '/partials/hero.php'; ?>
+      <?php include __DIR__ . '/partials/featured.php'; ?>
+      <div class="row g-5">
+        <div class="col-md-8">
+          <?php include __DIR__ . '/partials/posts.php'; ?>
+        </div>
+        <div class="col-md-4">
+          <?php include __DIR__ . '/partials/sidebar.php'; ?>
+        </div>
 
-class Task 
-{
-  public function job(Logger $logger)
-  {
-    for($i = 0; $i<10; $i++)
-    {
-      $logger->log("Job $i was done!");
-    }
-  }
-}
-
-class ConsoleLogger implements Logger
-{
-  public function log($message)
-  {
-    echo "$message\n";
-  }
-}
-
-class NothingLogger implements Logger
-{
-  public function log($message)
-  {
-    echo "nuh uh\n";
-  }
-}
-
-interface Logger 
-{
-  public function log($message);
-}
-
-
-$logger = new NothingLogger();
-$task = new Task();
-$task->job($logger);
+    </main>
+<?php include __DIR__ . '/partials/footer.php'; ?>
