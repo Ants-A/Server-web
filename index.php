@@ -1,77 +1,38 @@
 <?php
 
-class Box 
+class Task 
 {
-  public bool $isOpen = false;
-  protected bool $hasBeenOpened = false;
-
-  public function __construct(public int $width, public $height, public $length)
+  public function job(Logger $logger)
   {
-    
-  }
-
-  public function setWidth(int $width) 
-  {
-    if ($width<0)
+    for($i = 0; $i<10; $i++)
     {
-      $this->width = 0;
+      $logger->log("Job $i was done!");
     }
-    $this->width = $width;
-  }
-
-  public function open()
-  {
-    $this->isOpen = true;
-  }
-
-  public function volume()
-  {
-    return $this->width * $this->height * $this->length;
-  }
-
-  public function test1 ()
-  {
-    var_dump($this->hasBeenOpened);
   }
 }
 
-class MetalBox extends Box 
+class ConsoleLogger implements Logger
 {
-  public $weightPerUnit;
-
-  public function mass() 
+  public function log($message)
   {
-    return $this->weightPerUnit * $this->volume();
-  }
-
-
-  public function test2 ()
-  {
-    var_dump($this->hasBeenOpened);
+    echo "$message\n";
   }
 }
 
-trait HasColor 
+class NothingLogger implements Logger
 {
-  public $color;
-  public function showColor()
+  public function log($message)
   {
-    return $this-color;
+    echo "nuh uh\n";
   }
 }
 
-trait HasSmell 
+interface Logger 
 {
-  public $smell;
-  public function sniff()
-  {
-    return $this-smell;
-  }
+  public function log($message);
 }
 
 
-$metal1 = new MetalBox(1, 2, 3);
-$metal1->weightPerUnit = 1;
-var_dump($metal1->mass());
-$metal1->test1();
-$metal1->test2();
+$logger = new NothingLogger();
+$task = new Task();
+$task->job($logger);
