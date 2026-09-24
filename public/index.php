@@ -11,8 +11,25 @@ function dump(...$values)
   echo '</pre>';
 }
 
-#dump($_SERVER);
+spl_autoload_register(function ($class)
+{
+  $class = substr($class, strlen('App\\'));
+  $class = str_replace('\\', '/', $class);
+  dump($class);
+  require_once __DIR__ . "/../src/$class.php";
+});
 
+use App\Controllers\PublicController;
+use App\DB;
+use App\Router;
+
+$router = new Router();
+$db = new DB();
+$controller = new PublicController();
+dump ($router, $db, $controller);
+
+#dump($_SERVER);
+/*
 switch($_SERVER['REQUEST_URI'])
 {
 case '/':
@@ -25,6 +42,7 @@ case '/technology';
   include __DIR__ .  '/../views/technology.php';
   break;
 default:
-  echo '404';
+  echo '405';
 }
+ */
 ?>
