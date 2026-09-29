@@ -98,6 +98,18 @@ class PublicController
     ];
     view("technology", compact('title', 'posts'));
   }
+
+  public function form()
+  {
+    $title = 'Form';
+    view("form", compact('title'));
+  }
+
+  public function answer()
+  {
+    $title = 'Answer';
+    dump($_GET, $_POST);
+  }
 }
 
 ?>
