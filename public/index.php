@@ -7,13 +7,6 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js)$/', $_SERVER["REQUEST_URI"]))
   return false;
 }
 
-function dump(...$values)
-{
-  echo '<pre>';
-  var_dump(...$values); 
-  echo '</pre>';
-}
-
 spl_autoload_register(function ($class)
 {
   $class = substr($class, strlen('App\\'));
@@ -21,13 +14,24 @@ spl_autoload_register(function ($class)
   require_once __DIR__ . "/../src/$class.php";
 });
 
+require __DIR__ . '/../helpers.php';
 require __DIR__ . '/../routes.php';
 
 $router = new Router($_SERVER['REQUEST_URI']);
 $match = $router->match();
 if ($match)
 {
-  call_user_func($match->getAction());
+  if(is_callable($match->getAction()))
+  {
+    call_user_func($match->getAction());
+  }
+  else 
+  {
+    $class = $match->getAction()[0];
+    $controller = new $class();
+    $method = $match->getAction()[1];
+    $controller->$method();
+  }
 }
 else
 {
