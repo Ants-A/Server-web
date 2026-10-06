@@ -20,7 +20,6 @@ class DB
       $this->conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
       // set the PDO error mode to exception
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      echo "Connected successfully";
     } catch (PDOException $e) {
       echo "Connection failed: " . $e->getMessage();
     }
@@ -29,6 +28,14 @@ class DB
   public function all($table, $class)
   {
     $sql = "SELECT * FROM $table";
+    $result = $this->conn->query($sql);
+    $result->setFetchMode(PDO::FETCH_CLASS, $class);
+    return $result->fetchAll();
+  }
+
+  public function where($table, $class, $field, $value) {
+    $sql = "SELECT * FROM $table WHERE $field='$value'";
+    // Execute the SQL query
     $result = $this->conn->query($sql);
     $result->setFetchMode(PDO::FETCH_CLASS, $class);
     return $result->fetchAll();

@@ -1,8 +1,9 @@
 <?php
 namespace App\Models;
 
-class User 
+class User extends Model 
 {
+  public static $table = 'users';
   public $id;
   public $name;
   public $email;

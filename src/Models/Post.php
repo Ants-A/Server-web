@@ -1,8 +1,9 @@
 <?php
 namespace App\Models;
 
-class Post 
+class Post extends Model 
 {
+  public static $table = 'posts';
   public $id;
   public $title;
   public $body;
