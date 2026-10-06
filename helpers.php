@@ -8,6 +8,17 @@ function dump(...$values)
   echo '</pre>';
 }
 
+function dd(...$values)
+{
+  dump(...$values);
+  die;
+}
+
+function redirect($path)
+{
+  header("Location: $path");
+}
+
 function view($viewName, $variables = [])
 {
   extract($variables);

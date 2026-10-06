@@ -1,12 +1,10 @@
 <?php
 namespace App;
 
-use App\Models\Post;
 use PDO;
 use PDOException;
 
-class DB
-{
+class DB {
   private PDO $conn;
 
   public function __construct()
@@ -23,11 +21,11 @@ class DB
     } catch (PDOException $e) {
       echo "Connection failed: " . $e->getMessage();
     }
-  }  
+  }
 
-  public function all($table, $class)
-  {
+  public function all($table, $class) {
     $sql = "SELECT * FROM $table";
+    // Execute the SQL query
     $result = $this->conn->query($sql);
     $result->setFetchMode(PDO::FETCH_CLASS, $class);
     return $result->fetchAll();
@@ -40,6 +38,12 @@ class DB
     $result->setFetchMode(PDO::FETCH_CLASS, $class);
     return $result->fetchAll();
   }
-}
 
-?>
+  public function insert($table, $fields){
+    $fieldNames = array_keys($fields);
+    $fieldNamesText = implode(', ', $fieldNames);
+    $fieldValuesText = implode("', '", $fields);
+    $sql = "INSERT INTO $table ($fieldNamesText) VALUES ('$fieldValuesText')";
+    $this->conn->exec($sql);
+  }
+}
