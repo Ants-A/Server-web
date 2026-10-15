@@ -1,4 +1,4 @@
-<div class="container">
+    <div class="container">
         <header class="border-bottom lh-1 py-3">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-4 pt-1">
@@ -9,7 +9,7 @@
                         class="blog-header-logo text-body-emphasis text-decoration-none"
                         href="#">Large</a>
                 </div>
-                <div class="col-4 d-flex justify-content-end align-items-center gap-3">
+                <div class="col-4 d-flex justify-content-end align-items-center gap-2">
                     <a class="link-secondary" href="#" aria-label="Search">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -28,8 +28,19 @@
                             <path d="M21 21l-5.2-5.2"></path>
                         </svg>
                     </a>
-                    <a class="btn btn-sm btn-outline-secondary" href="/register">Sign up</a>
-                    <a class="btn btn-sm btn-outline-primary" href="/login">Login</a>
+                    <?php if (auth()): ?>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?= auth()->name ?>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+                        <a class="btn btn-sm btn-outline-secondary" href="/register">Sign up</a>
+                        <a class="btn btn-sm btn-outline-primary" href="/login">Login</a>
+                    <?php endif ?>
                 </div>
             </div>
         </header>
@@ -38,7 +49,7 @@
                 <a class="nav-item nav-link link-body-emphasis active" href="/">World</a>
                 <a class="nav-item nav-link link-body-emphasis" href="/us">U.S.</a>
                 <a class="nav-item nav-link link-body-emphasis" href="/technology">Technology</a>
-                <a class="nav-item nav-link link-body-emphasis" href="/form">Design</a>
+                <a class="nav-item nav-link link-body-emphasis" href="/form">Form</a>
                 <a class="nav-item nav-link link-body-emphasis" href="/admin/posts">Posts</a>
                 <a class="nav-item nav-link link-body-emphasis" href="#">Business</a>
                 <a class="nav-item nav-link link-body-emphasis" href="#">Politics</a>
