@@ -13,6 +13,23 @@ class UsersController
         view('users/index', compact('title', 'users'));
     }
 
+    public function create() {
+        view('users/create');
+    }
+
+    public function store() {
+        $users = User::where('email', $_POST['email']);
+        if($users) {
+            return redirect('/admin/users/create');
+        }
+        $user = new User();
+        $user->name = $_POST['name'];
+        $user->email = $_POST['email'];
+        $user->password = password_hash($user->name . $user->email . $_POST['password'] . md5('yolo'), PASSWORD_BCRYPT);
+        $user->save();
+        redirect('/admin/users');
+    }
+
     public function view() {
         $user = User::find($_GET['id']);
         if($user) {

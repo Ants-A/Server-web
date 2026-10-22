@@ -26,6 +26,8 @@ Route::post('/admin/posts/edit', [PostsController::class, 'update']);
 Route::get('/admin/posts/delete', [PostsController::class, 'delete']);
 
 Route::get('/admin/users', [UsersController::class, 'index']);
+Route::get('/admin/users/create', [UsersController::class, 'create']);
+Route::post('/admin/users', [UsersController::class, 'store']);
 Route::get('/admin/users/view', [UsersController::class, 'view']);
 Route::get('/admin/users/edit', [UsersController::class, 'edit']);
 Route::post('/admin/users/edit', [UsersController::class, 'update']);
