@@ -42,4 +42,13 @@ class UsersController
         }
         echo 404;
     }
+
+    public function delete() {
+        $user = User::find($_GET['id']);
+        if($user) {
+           $user->delete();
+           return redirect('/admin/users');
+        }
+        echo 404;
+    }
 }

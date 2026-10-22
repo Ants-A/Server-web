@@ -29,6 +29,7 @@ Route::get('/admin/users', [UsersController::class, 'index']);
 Route::get('/admin/users/view', [UsersController::class, 'view']);
 Route::get('/admin/users/edit', [UsersController::class, 'edit']);
 Route::post('/admin/users/edit', [UsersController::class, 'update']);
+Route::get('/admin/users/delete', [UsersController::class, 'delete']);
 
 Route::get('/register', [AuthController::class, 'registerForm']);
 Route::post('/register', [AuthController::class, 'register']);
