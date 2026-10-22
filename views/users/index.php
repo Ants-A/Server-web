@@ -1,5 +1,6 @@
 <?php include __DIR__ . '/../partials/header.php'; ?>
 <main class="container">
+    <a href="/admin/users/create" class="btn btn-primary">New User</a>
     <table class="table table-striped table-hover">
         <thead>
             <th>ID</th>
