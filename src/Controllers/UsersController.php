@@ -20,4 +20,26 @@ class UsersController
         }
         echo 404;
     }
+
+    public function edit() {
+        $user = User::find($_GET['id']);
+        if($user) {
+            return view('users/edit', compact('user'));
+        }
+        echo 404;
+    }
+
+    public function update(){
+        $user = User::find($_GET['id']);
+        if($user) {
+            $user->name = $_POST['name'];
+            $user->email = $_POST['email'];
+            if(!empty($_POST['password'])) {
+                $user->password = password_hash($user->name . $user->email . $_POST['password'] . md5('yolo'), PASSWORD_BCRYPT);
+            }
+            $user->save();
+            return redirect('/admin/users');
+        }
+        echo 404;
+    }
 }
